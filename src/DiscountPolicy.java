@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
-public class DiscountPolicy {
+public interface DiscountPolicy {
+    double getDiscountAmount(double totalAmount);
 }

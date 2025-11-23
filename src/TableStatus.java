@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+import java.io.Serializable;
 
-public class TableStatus {
+public enum TableStatus implements Serializable {
+    AVAILABLE,  // Trống
+    BOOKED,     // Đã đặt
+    OCCUPIED    // Đang phục vụ
 }

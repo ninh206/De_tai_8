@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+import java.io.Serializable;
 
-public class MenuItemType {
+public enum MenuItemType implements Serializable {
+    FOOD,
+    DRINK
 }
