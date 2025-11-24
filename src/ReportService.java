@@ -1,20 +1,22 @@
-import java.util.List;
-
+// Can them BookingService vao ReportService
 public class ReportService {
     private InvoiceService invoiceService;
+    private BookingService bookingService; // Them
 
-    public ReportService(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
+    public ReportService(InvoiceService is, BookingService bs) {
+        this.invoiceService = is;
+        this.bookingService = bs;
     }
 
-    public double calculateDailyRevenue(String date) {
-        double total = 0;
-        List<Invoice> invoices = invoiceService.getAllInvoices();
-        for (Invoice inv : invoices) {
-            if (inv.getDate().equals(date)) {
-                total += inv.getTotalAmount();
+    // ... (Giữ hàm cũ)
+
+    public int countBookingsByDate(String date) {
+        int count = 0;
+        for (Booking b : bookingService.getBookings()) {
+            if (b.getDate().equals(date)) {
+                count++;
             }
         }
-        return total;
+        return count;
     }
 }
