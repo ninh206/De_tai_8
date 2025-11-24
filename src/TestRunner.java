@@ -46,4 +46,16 @@ public class TestRunner {
             System.out.println("PASSED (Da bat duoc loi: " + e.getMessage() + ")");
         }
     }
+    private static void testCalculateInvoice() {
+        System.out.print("Test 3 (Tinh tien giam gia VIP): ");
+        InvoiceService is = new InvoiceService();
+        // Gia su hoa don 2 trieu, VIP giam 5% (100k) -> Con 1.9 trieu
+        Invoice inv = is.createInvoice("INV01", "T01", 2000000, "2023-01-01");
+
+        if (inv.getTotalAmount() == 1900000) {
+            System.out.println("PASSED");
+        } else {
+            System.out.println("FAILED (Ket qua: " + inv.getTotalAmount() + ")");
+        }
+    }
 }
