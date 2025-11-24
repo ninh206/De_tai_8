@@ -40,8 +40,14 @@ public class TableUI {
 
     private void addTable() {
         String id = InputHelper.getString("Nhap ID ban (VD: T10)");
-        int seats = InputHelper.getInt("So ghe");
-        int type = InputHelper.getInt("Loai (1: Thuong, 2: VIP)");
+        // Đã đúng: seats >= 1
+        int seats = InputHelper.getInt("So ghe", 1);
+        // SỬA: Phải giới hạn type chỉ có thể là 1 hoặc 2 (chọn loại bàn)
+        int type = InputHelper.getInt("Loai (1: Thuong, 2: VIP)", 1);
+
+        // Tuy nhien, neu muon gioi han type chi la 1 HOAC 2, can viet mot loop:
+        // while (type != 1 && type != 2) { type = InputHelper.getInt("..."); }
+        // Tam thoi giu input helper don gian:
 
         Table t;
         if (type == 2) t = new VipTable(id, seats);

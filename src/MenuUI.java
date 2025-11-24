@@ -18,7 +18,8 @@ public class MenuUI {
             switch (choice) {
                 case 1: showMenu(); break;
                 case 2: addMenuItem(); break;
-                case 3: deleteMenuItem(); break;
+                case 3: deleteMenuItem(); break; // THÊM DÒNG NÀY ĐỂ GỌI CHỨC NĂNG XÓA
+                default: System.out.println("Chon sai!");
             }
         }
     }
@@ -38,7 +39,9 @@ public class MenuUI {
     private void addMenuItem() {
         String id = InputHelper.getString("Ma mon");
         String name = InputHelper.getString("Ten mon");
+        // SỬA: Dùng InputHelper an toàn (giá >= 0)
         double price = InputHelper.getDouble("Gia tien", 0);
+        // SỬA: Dùng InputHelper an toàn (loại >= 1)
         int type = InputHelper.getInt("Loai (1: Do an, 2: Nuoc uong)", 1);
 
         MenuItem item;

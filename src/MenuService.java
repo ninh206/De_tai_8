@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.List;
 import java.util.ArrayList;
 public class MenuService {
@@ -8,20 +11,11 @@ public class MenuService {
         this.menuRepo = new MenuRepository();
         this.menuItems = menuRepo.load(); // Load data
     }
-
     public void addMenuItem(MenuItem item) {
         menuItems.add(item);
-        menuRepo.save(menuItems); // Save data
+        menuRepo.save(menuItems);
     }
 
-    public MenuItem searchByName(String name) throws MenuItemNotFoundException {
-        for (MenuItem item : menuItems) {
-            if (item.getName().equalsIgnoreCase(name)) {
-                return item;
-            }
-        }
-        throw new MenuItemNotFoundException("Khong tim thay mon: " + name);
-    }
     public void deleteMenuItem(String id) throws MenuItemNotFoundException {
         MenuItem item = null;
         for (MenuItem m : menuItems) {
@@ -36,13 +30,17 @@ public class MenuService {
         menuRepo.save(menuItems);
         System.out.println("Da xoa mon: " + item.getName());
     }
-    public List<MenuItem> searchByPriceRange(double min, double max) {
-        List<MenuItem> result = new ArrayList<>();
+
+    public MenuItem searchByName(String name) throws MenuItemNotFoundException {
         for (MenuItem item : menuItems) {
-            if (item.getPrice() >= min && item.getPrice() <= max) {
-                result.add(item);
+            if (item.getName().equalsIgnoreCase(name)) {
+                return item;
             }
         }
-        return result;
+        throw new MenuItemNotFoundException("Khong tim thay mon: " + name);
+    }
+
+    public List<MenuItem> getAllItems() {
+        return menuItems;
     }
 }

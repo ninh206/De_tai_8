@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuRepository implements Persistable<MenuItem> {
-    private static final String FILE_NAME = "menu.csv";
+    private static final String FILE_NAME = Constants.FILE_MENU;
 
     @Override
     public void save(List<MenuItem> items) {

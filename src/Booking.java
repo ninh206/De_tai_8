@@ -1,11 +1,13 @@
 import java.io.Serializable;
-/**
- * Dai dien cho mot luot dat ban cua khach hang.
- * Chua thong tin thoi gian, khach hang va ban duoc chon.
- */
+
 public class Booking implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String bookingId, customerId, tableId, date, time;
+
+    private String bookingId;
+    private String customerId;
+    private String tableId;
+    private String date; // yyyy-MM-dd
+    private String time; // HH:mm
 
     public Booking(String bookingId, String customerId, String tableId, String date, String time) {
         this.bookingId = bookingId;
@@ -14,12 +16,22 @@ public class Booking implements Serializable {
         this.date = date;
         this.time = time;
     }
-    public String getTableId() { return tableId; }
-    public String getDate() { return date; }
+
+    // --- CÁC HÀM GETTER (Bắt buộc phải có để Repository đọc dữ liệu) ---
     public String getBookingId() { return bookingId; }
+
+    public String getCustomerId() { return customerId; }
+
+    public String getTableId() { return tableId; }
+
+    public String getDate() { return date; }
+
+    // ĐÂY LÀ HÀM BẠN ĐANG THIẾU:
+    public String getTime() { return time; }
+    // ------------------------------------------------------------------
 
     @Override
     public String toString() {
-        return "Booking " + bookingId + ": Ban " + tableId + " - " + date + " " + time;
+        return "Booking [" + bookingId + "] Khách: " + customerId + " - Bàn: " + tableId + " lúc " + time + " " + date;
     }
 }
