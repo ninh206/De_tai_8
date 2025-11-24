@@ -30,6 +30,13 @@ public class TableService {
             System.out.println(e.getMessage());
         }
     }
-
+    public Table suggestTable(int numberOfPeople) {
+        for (Table t : tables) {
+            if (t.getStatus() == TableStatus.AVAILABLE && t.getSeats() >= numberOfPeople) {
+                return t;
+            }
+        }
+        return null; // Khong tim thay
+    }
     public List<Table> getAllTables() { return tables; }
 }
