@@ -67,4 +67,21 @@ public class TestRunner {
             if (ms.searchByName("Test Food") != null) System.out.println("PASSED");
         } catch (Exception e) { System.out.println("FAILED"); }
     }
+    private static void testCancelBooking() {
+        System.out.print("Test 5 (Huy dat ban): ");
+        TableService ts = new TableService();
+        ts.addTable(new StandardTable("T_CANCEL", 4));
+        BookingService bs = new BookingService(ts);
+
+        try {
+            bs.createBooking(new Booking("B_C", "C", "T_CANCEL", "2023-01-01", "10:00"));
+            bs.cancelBooking("T_CANCEL"); // Huy
+
+            if (ts.getTableById("T_CANCEL").getStatus() == TableStatus.AVAILABLE) {
+                System.out.println("PASSED");
+            } else {
+                System.out.println("FAILED");
+            }
+        } catch (Exception e) { System.out.println("FAILED " + e.getMessage()); }
+    }
 }
