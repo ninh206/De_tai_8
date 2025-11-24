@@ -18,28 +18,28 @@ public class MenuUI {
             switch (choice) {
                 case 1: showMenu(); break;
                 case 2: addMenuItem(); break;
+                case 3: deleteMenuItem(); break;
             }
         }
     }
-    private void deleteMenuItem() {
-        String id = InputHelper.getString("Nhap ID mon can xoa");
-        try {
-            menuService.deleteMenuItem(id);
-        } catch (Exception e) {
-            System.out.println("Loi: " + e.getMessage());
-        }
-    }
+
     private void showMenu() {
+        System.out.println("\n-----------------------------------------------------");
+        System.out.printf("%-10s | %-20s | %-15s\n", "MA MON", "TEN MON", "GIA (VND)");
+        System.out.println("-----------------------------------------------------");
+
         for (MenuItem item : menuService.getAllItems()) {
-            System.out.println(item);
+            System.out.printf("%-10s | %-20s | %-15.0f\n",
+                    item.getId(), item.getName(), item.getPrice());
         }
+        System.out.println("-----------------------------------------------------");
     }
 
     private void addMenuItem() {
         String id = InputHelper.getString("Ma mon");
         String name = InputHelper.getString("Ten mon");
-        double price = InputHelper.getDouble("Gia tien");
-        int type = InputHelper.getInt("Loai (1: Do an, 2: Nuoc uong)");
+        double price = InputHelper.getDouble("Gia tien", 0);
+        int type = InputHelper.getInt("Loai (1: Do an, 2: Nuoc uong)", 1);
 
         MenuItem item;
         if (type == 1) item = new Food(id, name, price);
@@ -47,5 +47,14 @@ public class MenuUI {
 
         menuService.addMenuItem(item);
         System.out.println("Them mon thanh cong!");
+    }
+
+    private void deleteMenuItem() {
+        String id = InputHelper.getString("Nhap ID mon can xoa");
+        try {
+            menuService.deleteMenuItem(id);
+        } catch (Exception e) {
+            System.out.println("Loi: " + e.getMessage());
+        }
     }
 }
