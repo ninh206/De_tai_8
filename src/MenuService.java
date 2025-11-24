@@ -1,5 +1,5 @@
 import java.util.List;
-
+import java.util.ArrayList;
 public class MenuService {
     private List<MenuItem> menuItems;
     private MenuRepository menuRepo;
@@ -36,5 +36,13 @@ public class MenuService {
         menuRepo.save(menuItems);
         System.out.println("Da xoa mon: " + item.getName());
     }
-    public List<MenuItem> getAllItems() { return menuItems; }
+    public List<MenuItem> searchByPriceRange(double min, double max) {
+        List<MenuItem> result = new ArrayList<>();
+        for (MenuItem item : menuItems) {
+            if (item.getPrice() >= min && item.getPrice() <= max) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 }
