@@ -1,15 +1,17 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuService {
     private List<MenuItem> menuItems;
+    private MenuRepository menuRepo;
 
     public MenuService() {
-        this.menuItems = new ArrayList<>();
+        this.menuRepo = new MenuRepository();
+        this.menuItems = menuRepo.load(); // Load data
     }
 
     public void addMenuItem(MenuItem item) {
         menuItems.add(item);
+        menuRepo.save(menuItems); // Save data
     }
 
     public MenuItem searchByName(String name) throws MenuItemNotFoundException {
@@ -22,5 +24,4 @@ public class MenuService {
     }
 
     public List<MenuItem> getAllItems() { return menuItems; }
-    public void setMenuItems(List<MenuItem> menuItems) { this.menuItems = menuItems; }
 }
