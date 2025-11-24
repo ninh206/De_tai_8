@@ -38,5 +38,14 @@ public class TableService {
         }
         return null; // Khong tim thay
     }
+    public void deleteTable(String id) throws TableNotFoundException {
+        Table t = getTableById(id);
+        if (t.getStatus() != TableStatus.AVAILABLE) {
+            throw new RuntimeException("Khong the xoa ban dang co nguoi hoac da dat!");
+        }
+        tables.remove(t);
+        tableRepo.save(tables); // Cap nhat file
+        System.out.println("Da xoa ban: " + id);
+    }
     public List<Table> getAllTables() { return tables; }
 }
