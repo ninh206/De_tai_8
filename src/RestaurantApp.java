@@ -20,6 +20,7 @@ public class RestaurantApp {
             System.out.println("3. Dat ban & Check-in");
             System.out.println("4. Thanh toan");
             System.out.println("5. Bao cao doanh thu");
+            System.out.println("8. Chay kiem thu (Test Cases)");
             System.out.println("9. Reset data mau");
             System.out.println("0. Thoat");
 
@@ -32,6 +33,7 @@ public class RestaurantApp {
                 case 3: bookingUI.handle(); break;
                 case 4: invoiceUI.handle(); break;
                 case 5: reportUI.handle(); break;
+                case 8: TestRunner.runAllTests(); break;
                 case 9:
                     DataSeeder.generateData();
                     System.out.println("Vui long khoi dong lai app de load data moi!");
