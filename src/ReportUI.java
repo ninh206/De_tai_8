@@ -1,27 +1,22 @@
-import java.util.List;
-
 public class ReportUI {
-    private InvoiceService invoiceService;
+    private ReportService reportService; // Doi sang dung ReportService
 
     public ReportUI(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
+        this.reportService = new ReportService(invoiceService);
     }
 
     public void handle() {
-        List<Invoice> list = invoiceService.getAllInvoices();
-        double totalRevenue = 0;
+        System.out.println("\n--- BAO CAO ---");
+        System.out.println("1. Doanh thu tong");
+        System.out.println("2. Doanh thu theo ngay");
+        int choice = InputHelper.getInt("Chon");
 
-        System.out.println("\n--- BAO CAO DOANH THU ---");
-        System.out.printf("%-10s %-10s %-15s %-15s\n", "Ma HD", "Ban", "Ngay", "Tong Tien");
-
-        for (Invoice inv : list) {
-            System.out.printf("%-10s %-10s %-15s %-15.0f\n",
-                    "HD...", "TB...", inv.getDate(), inv.getTotalAmount());
-            // (Tam thoi in don gian vi Invoice chua co getter chi tiet id, tableId o cac buoc truoc)
-            totalRevenue += inv.getTotalAmount();
+        if (choice == 1) {
+            // Logic cu (ban tu them vao hoac giu nguyen)
+        } else if (choice == 2) {
+            String date = InputHelper.getString("Nhap ngay (yyyy-MM-dd)");
+            double total = reportService.calculateDailyRevenue(date);
+            System.out.println("Doanh thu ngay " + date + ": " + total + " VND");
         }
-
-        System.out.println("---------------------------");
-        System.out.println("TONG DOANH THU: " + totalRevenue + " VND");
     }
 }
