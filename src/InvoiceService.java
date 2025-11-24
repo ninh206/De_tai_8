@@ -1,5 +1,6 @@
 import java.util.List;
-
+import java.io.FileWriter;
+import java.io.IOException;
 public class InvoiceService {
     private List<Invoice> invoices;
     private DiscountPolicy discountPolicy;
@@ -20,6 +21,17 @@ public class InvoiceService {
 
         invoiceRepo.save(invoices); // Luu xuong file ngay lap tuc
         return invoice;
+    }
+    public void exportInvoiceToText(Invoice invoice) {
+        String filename = "Invoice_" + invoice.getDate() + ".txt";
+        try (FileWriter writer = new FileWriter(filename, true)) {
+            writer.write("----- HOA DON -----\n");
+            writer.write(invoice.toString() + "\n");
+            writer.write("-------------------\n\n");
+            System.out.println("Da xuat hoa don ra file: " + filename);
+        } catch (IOException e) {
+            System.out.println("Loi xuat file: " + e.getMessage());
+        }
     }
 
     public List<Invoice> getAllInvoices() { return invoices; }
