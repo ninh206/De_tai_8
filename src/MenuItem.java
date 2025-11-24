@@ -5,7 +5,9 @@ public abstract class MenuItem implements Serializable {
     protected String id, name;
     protected double price;
     protected MenuItemType type;
-
+    protected int salesCount = 0; // Them thuoc tinh nay
+    public void incrementSales() { this.salesCount++; }
+    public int getSalesCount() { return salesCount; }
     public MenuItem(String id, String name, double price, MenuItemType type) {
         this.id = id;
         this.name = name;
