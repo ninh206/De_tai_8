@@ -10,6 +10,7 @@ public class TableUI {
             System.out.println("\n--- QUAN LY BAN AN ---");
             System.out.println("1. Danh sach ban");
             System.out.println("2. Them ban moi");
+            System.out.println("3. Xoa ban");
             System.out.println("0. Quay lai");
             int choice = InputHelper.getInt("Chon");
 
@@ -17,11 +18,19 @@ public class TableUI {
             switch (choice) {
                 case 1: showTables(); break;
                 case 2: addTable(); break;
+                case 3: deleteTable(); break;
                 default: System.out.println("Chon sai!");
             }
         }
     }
-
+    private void deleteTable() {
+        String id = InputHelper.getString("Nhap ID ban can xoa");
+        try {
+            tableService.deleteTable(id);
+        } catch (Exception e) {
+            System.out.println("Loi: " + e.getMessage());
+        }
+    }
     private void showTables() {
         System.out.println("\n--- DANH SACH BAN ---");
         for (Table t : tableService.getAllTables()) {
