@@ -4,7 +4,6 @@ import java.util.List;
 
 public class CsvHelper {
 
-    // Ghi danh sach cac dong (lines) vao file
     public static void write(String fileName, List<String> lines) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (String line : lines) {
@@ -16,11 +15,15 @@ public class CsvHelper {
         }
     }
 
-    // Doc tat ca cac dong tu file
     public static List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();
         File file = new File(fileName);
-        if (!file.exists()) return lines; // File chua co thi tra ve list rong
+
+        // Kiem tra file ton tai truoc khi doc
+        if (!file.exists()) {
+            System.out.println("Luu y: File " + fileName + " chua ton tai (se tu tao moi).");
+            return lines;
+        }
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -30,7 +33,7 @@ public class CsvHelper {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Loi doc file " + fileName + ": " + e.getMessage());
+            System.err.println("Loi doc file: " + e.getMessage());
         }
         return lines;
     }
