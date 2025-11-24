@@ -11,4 +11,23 @@ public class TestRunner {
     private static void testBookingSuccess() { System.out.println("Test 1: Pending..."); }
     private static void testBookingFail() { System.out.println("Test 2: Pending..."); }
     private static void testCalculateInvoice() { System.out.println("Test 3: Pending..."); }
+    private static void testBookingSuccess() {
+        System.out.print("Test 1 (Dat ban trong): ");
+        TableService ts = new TableService();
+        ts.addTable(new StandardTable("TEST_T1", 4)); // Tao ban ao
+        BookingService bs = new BookingService(ts);
+
+        Booking b = new Booking("B01", "C01", "TEST_T1", "2023-01-01", "18:00");
+        try {
+            bs.createBooking(b);
+            // Kiem tra trang thai ban
+            if (ts.getTableById("TEST_T1").getStatus() == TableStatus.BOOKED) {
+                System.out.println("PASSED");
+            } else {
+                System.out.println("FAILED (Trang thai ban khong doi)");
+            }
+        } catch (Exception e) {
+            System.out.println("FAILED (" + e.getMessage() + ")");
+        }
+    }
 }
