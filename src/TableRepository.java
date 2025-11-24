@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableRepository implements Persistable<Table> {
-    private static final String FILE_NAME = "tables.csv";
+    private static final String FILE_NAME = Constants.FILE_TABLES;
 
     @Override
     public void save(List<Table> tables) {
