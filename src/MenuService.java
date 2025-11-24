@@ -22,6 +22,19 @@ public class MenuService {
         }
         throw new MenuItemNotFoundException("Khong tim thay mon: " + name);
     }
+    public void deleteMenuItem(String id) throws MenuItemNotFoundException {
+        MenuItem item = null;
+        for (MenuItem m : menuItems) {
+            if (m.getId().equals(id)) {
+                item = m;
+                break;
+            }
+        }
+        if (item == null) throw new MenuItemNotFoundException("Khong tim thay mon: " + id);
 
+        menuItems.remove(item);
+        menuRepo.save(menuItems);
+        System.out.println("Da xoa mon: " + item.getName());
+    }
     public List<MenuItem> getAllItems() { return menuItems; }
 }
