@@ -1,5 +1,8 @@
 import java.io.Serializable;
-
+/**
+ * Dai dien cho mot luot dat ban cua khach hang.
+ * Chua thong tin thoi gian, khach hang va ban duoc chon.
+ */
 public class Booking implements Serializable {
     private static final long serialVersionUID = 1L;
     private String bookingId, customerId, tableId, date, time;
