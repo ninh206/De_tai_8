@@ -11,7 +11,7 @@ public class RestaurantApp {
         MenuUI menuUI = new MenuUI(menuService);
         BookingUI bookingUI = new BookingUI(bookingService);
         InvoiceUI invoiceUI = new InvoiceUI(invoiceService, tableService);
-        ReportUI reportUI = new ReportUI(invoiceService);
+        ReportUI reportUI = new ReportUI(invoiceService,BookingService);
 
         while (true) {
             System.out.println("\n=== HE THONG QUAN LY NHA HANG ===");
