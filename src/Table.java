@@ -1,5 +1,8 @@
 import java.io.Serializable;
-
+/**
+ * Lop truu tuong dai dien cho mot ban an trong nha hang.
+ * Quan ly ID, so ghe va trang thai hoat dong.
+ */
 public abstract class Table implements Serializable {
     private static final long serialVersionUID = 1L;
     protected String id;
