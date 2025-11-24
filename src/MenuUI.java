@@ -10,6 +10,7 @@ public class MenuUI {
             System.out.println("\n--- QUAN LY THUC DON ---");
             System.out.println("1. Xem thuc don");
             System.out.println("2. Them mon moi");
+            System.out.println("3. Xoa mon");
             System.out.println("0. Quay lai");
             int choice = InputHelper.getInt("Chon");
 
@@ -20,7 +21,14 @@ public class MenuUI {
             }
         }
     }
-
+    private void deleteMenuItem() {
+        String id = InputHelper.getString("Nhap ID mon can xoa");
+        try {
+            menuService.deleteMenuItem(id);
+        } catch (Exception e) {
+            System.out.println("Loi: " + e.getMessage());
+        }
+    }
     private void showMenu() {
         for (MenuItem item : menuService.getAllItems()) {
             System.out.println(item);
