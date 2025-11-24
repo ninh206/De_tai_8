@@ -1,45 +1,42 @@
 public class RestaurantApp {
     public static void main(String[] args) {
-        // 1. Khoi tao Data mau (Chay 1 lan roi comment lai neu muon)
-        // DataSeeder.generateData();
-
-        // 2. Khoi tao Services
+        // Khoi tao Services
         TableService tableService = new TableService();
         MenuService menuService = new MenuService();
-        // BookingService & InvoiceService se them sau
+        BookingService bookingService = new BookingService(tableService);
+        InvoiceService invoiceService = new InvoiceService();
 
-        // 3. Khoi tao UI
+        // Khoi tao UI
         TableUI tableUI = new TableUI(tableService);
         MenuUI menuUI = new MenuUI(menuService);
+        BookingUI bookingUI = new BookingUI(bookingService);
+        InvoiceUI invoiceUI = new InvoiceUI(invoiceService, tableService);
+        ReportUI reportUI = new ReportUI(invoiceService);
 
-        // 4. Main Loop
         while (true) {
             System.out.println("\n=== HE THONG QUAN LY NHA HANG ===");
             System.out.println("1. Quan ly Ban an");
             System.out.println("2. Quan ly Thuc don");
-            System.out.println("3. Dat ban (Coming soon)");
-            System.out.println("4. Thanh toan (Coming soon)");
-            System.out.println("9. Khoi tao du lieu mau (Reset)");
+            System.out.println("3. Dat ban & Check-in");
+            System.out.println("4. Thanh toan");
+            System.out.println("5. Bao cao doanh thu");
+            System.out.println("9. Reset data mau");
             System.out.println("0. Thoat");
 
-            int choice = InputHelper.getInt("Chon chuc nang");
-            if (choice == 0) {
-                System.out.println("Tam biet!");
-                break;
-            }
+            int choice = InputHelper.getInt("Chon");
+            if (choice == 0) break;
 
             switch (choice) {
                 case 1: tableUI.handle(); break;
                 case 2: menuUI.handle(); break;
+                case 3: bookingUI.handle(); break;
+                case 4: invoiceUI.handle(); break;
+                case 5: reportUI.handle(); break;
                 case 9:
                     DataSeeder.generateData();
-                    // Reload lai data cho service
-                    tableService = new TableService();
-                    menuService = new MenuService();
-                    tableUI = new TableUI(tableService);
-                    menuUI = new MenuUI(menuService);
-                    break;
-                default: System.out.println("Chuc nang dang phat trien!");
+                    System.out.println("Vui long khoi dong lai app de load data moi!");
+                    return;
+                default: System.out.println("Sai chuc nang!");
             }
         }
     }
