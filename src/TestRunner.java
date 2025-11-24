@@ -58,4 +58,13 @@ public class TestRunner {
             System.out.println("FAILED (Ket qua: " + inv.getTotalAmount() + ")");
         }
     }
+    private static void testAddMenuItem() {
+        System.out.print("Test 4 (Them mon moi): ");
+        MenuService ms = new MenuService();
+        Food f = new Food("TEST_F", "Test Food", 100);
+        ms.addMenuItem(f);
+        try {
+            if (ms.searchByName("Test Food") != null) System.out.println("PASSED");
+        } catch (Exception e) { System.out.println("FAILED"); }
+    }
 }
