@@ -30,4 +30,20 @@ public class TestRunner {
             System.out.println("FAILED (" + e.getMessage() + ")");
         }
     }
+    private static void testBookingFail() {
+        System.out.print("Test 2 (Dat ban trung): ");
+        TableService ts = new TableService();
+        ts.addTable(new StandardTable("TEST_T2", 4));
+        ts.updateTableStatus("TEST_T2", TableStatus.OCCUPIED); // Set ban ban
+
+        BookingService bs = new BookingService(ts);
+        Booking b = new Booking("B02", "C01", "TEST_T2", "2023-01-01", "19:00");
+
+        try {
+            bs.createBooking(b);
+            System.out.println("FAILED (Khong bat duoc loi)");
+        } catch (TableAlreadyBookedException e) {
+            System.out.println("PASSED (Da bat duoc loi: " + e.getMessage() + ")");
+        }
+    }
 }
